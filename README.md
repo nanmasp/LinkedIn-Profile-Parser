@@ -1,4 +1,5 @@
 # LinkedIn Profile Parser
+I created this tool to streamline the process of extracting and structuring information from LinkedIn profile screenshots. Manually transcribing details from profile images is time-consuming and inefficient, so I leveraged OCR technology and AI to automate the process. This script allows for easy extraction, structuring, and summarization of LinkedIn profile data, making it more accessible and useful for networking and professional interactions.
 
 ## Overview
 This Python script extracts text from LinkedIn profile screenshots using Optical Character Recognition (OCR) and processes it using OpenAI's GPT-4 model. It then generates structured information, a professional summary, and a LinkedIn connection note tailored to the person.
