@@ -1,93 +1,89 @@
-# LinkedIn-Profile-Parser
+# LinkedIn Profile Parser
 
-Overview
+## Overview
+This Python script extracts text from LinkedIn profile screenshots using Optical Character Recognition (OCR) and processes it using OpenAI's GPT-4 model. It then generates structured information, a professional summary, and a LinkedIn connection note tailored to the person.
 
-This Python script extracts text from LinkedIn profile screenshots using Optical Character Recognition (OCR) and processes it using OpenAI's GPT-4 model. It then generates structured information, a professional summary, and a LinkedIn connection note tailored to setting up a meeting with McLaren Strategic Ventures.
+## Features
+- Extracts text from multiple LinkedIn profile screenshots.
+- Uses OpenAI's GPT-4 to analyze and structure profile data.
+- Generates a professional summary.
+- Creates a personalized LinkedIn connection note.
+- Saves extracted data to a CSV file.
 
-Features
+## Requirements
+- **Python 3.x**
+- **Tesseract-OCR** installed and configured
+- **OpenAI API key**
+- Required Python libraries:
+  
+  ```bash
+  pip install pytesseract pillow openai pandas
+  ```
 
-Extracts text from multiple LinkedIn profile screenshots.
+## Installation
+### Install Tesseract-OCR
+- **Windows**: Download and install from [Tesseract GitHub](https://github.com/UB-Mannheim/tesseract/wiki).
+- **macOS**: Install via Homebrew:
+  
+  ```bash
+  brew install tesseract
+  ```
+- **Linux**: Install using package manager:
+  
+  ```bash
+  sudo apt install tesseract-ocr
+  ```
 
-Uses OpenAI's GPT-4 to analyze and structure profile data.
+### Clone the Repository
 
-Generates a professional summary.
+```bash
+git clone https://github.com/yourusername/linkedin-profile-parser.git
+cd linkedin-profile-parser
+```
 
-Creates a personalized LinkedIn connection note.
+### Set Up OpenAI API Key
+Replace `openai.api_key = " "` in the script with your OpenAI API key.
 
-Saves extracted data to a CSV file.
+## Usage
+1. Place LinkedIn profile screenshots in the specified directory (update `image_directory` in the script).
+2. Run the script:
+   
+   ```bash
+   python linkedin_parser.py
+   ```
+3. The extracted information, summary, and connection note will be displayed and saved to `linkedin_output.csv`.
 
-Requirements
+## Output
+- **Structured Information:** Extracted key details from the LinkedIn profile.
+- **Professional Summary:** A brief summary of the person’s background.
+- **Connection Note:** A personalized message for reaching out on LinkedIn.
 
-Python 3.x
+## Issues Encountered & Fixes
+### 1. Setting Up Tesseract Path
+**Issue:** Initially, the script could not detect Tesseract-OCR.
+**Fix:** Manually set the Tesseract path in the script:
+  ```python
+  pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+  ```
 
-Tesseract-OCR installed and configured
+### 2. Text Extraction Accuracy
+**Issue:** Extracted text contained excessive noise or missing characters.
+**Fix:** Preprocessed images by converting them to grayscale and increasing contrast to improve OCR accuracy.
 
-OpenAI API key
+### 3. Handling OpenAI API Rate Limits
+**Issue:** Received `RateLimitError` while making API requests.
+**Fix:** Implemented exponential backoff retry logic to handle rate limits more gracefully.
 
-Required Python libraries:
+### 4. Structuring Extracted Information
+**Issue:** The raw extracted text was unstructured and difficult to parse.
+**Fix:** Used OpenAI’s API to generate structured JSON output and formatted it before saving.
 
-pytesseract
+### 5. Saving Data to CSV
+**Issue:** The extracted information was incorrectly formatted in the CSV file.
+**Fix:** Ensured the data was converted into a Pandas DataFrame before writing to the CSV.
 
-PIL (Pillow)
+## Notes
+- Ensure screenshots are clear for accurate OCR extraction.
+- If errors occur, verify Tesseract-OCR is installed and properly configured.
+- Modify `generate_connection_note` to customize the messaging for whatever your use case is.
 
-openai
-
-os
-
-json
-
-pandas
-
-Installation
-
-Install Python 3.x if not already installed.
-
-Install Tesseract-OCR:
-
-Windows: Download and install from Tesseract GitHub.
-
-macOS: Install via Homebrew:
-
-brew install tesseract
-
-Linux: Install using package manager:
-
-sudo apt install tesseract-ocr
-
-Install required Python packages:
-
-pip install pytesseract pillow openai pandas
-
-Set up your OpenAI API key:
-
-Replace openai.api_key = " " in the script with your API key.
-
-Usage
-
-Place LinkedIn profile screenshots in the specified directory (update image_directory in the script).
-
-Run the script:
-
-python linkedin_parser.py
-
-The extracted information, summary, and connection note will be displayed and saved to linkedin_output.csv.
-
-Output
-
-Structured Information: Extracted key details from the LinkedIn profile.
-
-Professional Summary: A brief summary of the person’s background.
-
-Connection Note: A personalized message for reaching out on LinkedIn.
-
-Notes
-
-Ensure screenshots are clear for accurate OCR extraction.
-
-If errors occur, verify Tesseract-OCR is installed and properly configured.
-
-Modify generate_connection_note to customize the messaging for different companies.
-
-License
-
-This project is for personal and professional use. Modify as needed!
